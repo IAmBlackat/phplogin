@@ -1,0 +1,10 @@
+body{
+    background-color:rgb(254, 215, 151);
+}
+#form{
+    background-color:#ffffff;
+    width: 25%;
+    margin: 120px auto;
+    padding: 50px;
+    box-sizing: 10px 10px 5px rgb(2, 51, 54);
+}

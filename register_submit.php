@@ -11,7 +11,7 @@ $password = $_POST['pass']; // Directly using posted password without hashing fo
     $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
     $stmt = $conn->prepare($sql);
     
-    if ($stmt) {
+$stmt->bind_param("ss", $username, $password);
         $stmt->bind_param("ss", $username, $hashed_password);
         if ($stmt->execute()) {
             echo "Registered successfully.";

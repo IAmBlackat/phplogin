@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = mysqli_real_escape_string($conn, $_POST['pass']);
     
     // Hashing the password for security
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+$password = $_POST['pass']; // Directly using posted password without hashing for testing purposes
 
     $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
     $stmt = $conn->prepare($sql);

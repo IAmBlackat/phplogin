@@ -10,10 +10,18 @@ if(isset($_POST['submit'])) {
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
-        $_SESSION['user'] = $user;
-        header("Location: welcome.php"); // Redirect to a welcome page
     } else {
-        echo "<script>alert('Username or password is incorrect!');</script>";
+        // Attempt to register the user if not found
+        $registerSql = "INSERT INTO users (username, password) VALUES (?, ?)";
+        $registerStmt = $conn->prepare($registerSql);
+        $registerStmt->bind_param("ss", $user, $pass);
+        if ($registerStmt->execute()) {
+            // Log the user in after successful registration
+            $_SESSION['user'] = $user;
+            header("Location: welcome.php");
+        } else {
+            echo "<script>alert('Registration failed or user already exists.');window.location.href = 'index.php';</script>";
+        }
     }
 }
 ?>
